@@ -1,5 +1,5 @@
-import { AppBar, Avatar, Badge, InputBase, Toolbar, Typography, styled } from '@mui/material'
-import React from 'react'
+import { AppBar, Avatar, Badge, InputBase, Menu, MenuItem, Toolbar, Typography, styled } from '@mui/material'
+import React, { useState } from 'react'
 import { Mail, Notifications, Pets } from '@mui/icons-material'
 // import img from './../../public/images/profilePic.jpg';
 
@@ -20,7 +20,7 @@ const Icons = styled("div")(({ theme }) => ({
   alignItems: "center",
   gap: "20px",
   [theme.breakpoints.up("sm")]: {
-    display:"flex",
+    display: "flex",
   }
 }));
 
@@ -29,15 +29,16 @@ const UserBox = styled("div")(({ theme }) => ({
   alignItems: "center",
   gap: "10px",
   [theme.breakpoints.up("sm")]: {
-    display:"none",
+    display: "none",
   }
 }));
 
 const NavBar = () => {
+  const [open, setOpen] = useState(false);
   return (
     <AppBar position="sticky">
       <StyledToolbar>
-        <Typography variant='h6' sx={{ display: { xs: "none", sm: "block" } }}>NavBar</Typography>
+        <Typography variant='h6' sx={{ display: { xs: "none", sm: "block" } }}>My App</Typography>
         <Pets sx={{ display: { xs: "block", sm: "none" } }} />
         <Search><InputBase placeholder="search..." /></Search>
         <Icons>
@@ -47,13 +48,36 @@ const NavBar = () => {
           <Badge badgeContent={2} color="error">
             <Notifications />
           </Badge>
-          <Avatar sx={{ width: 30, height: 30 }} alt="Maria Dawn" src={require('../static/img/profile-pic.jpg')} />
+          <Avatar 
+          sx={{ width: 30, height: 30 }} 
+          alt="Maria Dawn" 
+          src={require('../static/img/profile-pic.jpg')} 
+          onClick={()=>setOpen(true)}
+          />
         </Icons>
-        <UserBox>
+        <UserBox onClick={()=>setOpen(true)}>
           <Avatar sx={{ width: 30, height: 30 }} alt="Maria Dawn" src={require('../static/img/profile-pic.jpg')} />
           <Typography>Maria</Typography>
         </UserBox>
       </StyledToolbar>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        open={open}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <MenuItem >Profile</MenuItem>
+        <MenuItem >My account</MenuItem>
+        <MenuItem >Logout</MenuItem>
+      </Menu>
     </AppBar>
   )
 }
