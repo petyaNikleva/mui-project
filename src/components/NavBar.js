@@ -1,7 +1,7 @@
 import { AppBar, Avatar, Badge, InputBase, Toolbar, Typography, styled } from '@mui/material'
 import React from 'react'
 import { Mail, Notifications, Pets } from '@mui/icons-material'
-import img from './../static/img/profile-pic.jpg'
+// import img from './../../public/images/profilePic.jpg';
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -16,10 +16,22 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const Icons = styled("div")(({ theme }) => ({
+  display: "none",
+  alignItems: "center",
+  gap: "20px",
+  [theme.breakpoints.up("sm")]: {
+    display:"flex",
+  }
+}));
+
+const UserBox = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  gap: "20px"
-}))
+  gap: "10px",
+  [theme.breakpoints.up("sm")]: {
+    display:"none",
+  }
+}));
 
 const NavBar = () => {
   return (
@@ -35,8 +47,12 @@ const NavBar = () => {
           <Badge badgeContent={2} color="error">
             <Notifications />
           </Badge>
-          <Avatar sx={{ width: 30, height: 30 }} alt="Maria Dawn" src='https://i0.wp.com/newdoorfiji.com/wp-content/uploads/2018/03/profile-img-1.jpg?resize=300%2C300&ssl=1' />
+          <Avatar sx={{ width: 30, height: 30 }} alt="Maria Dawn" src={require('../static/img/profile-pic.jpg')} />
         </Icons>
+        <UserBox>
+          <Avatar sx={{ width: 30, height: 30 }} alt="Maria Dawn" src={require('../static/img/profile-pic.jpg')} />
+          <Typography>Maria</Typography>
+        </UserBox>
       </StyledToolbar>
     </AppBar>
   )
